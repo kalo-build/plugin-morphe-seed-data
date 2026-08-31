@@ -1,0 +1,34 @@
+name: "@kalo-build/plugin-morphe-seed-data"
+displayName: "Morphe Seed Data"
+description: "Generates realistic PSQL seed data (INSERT statements) from Morphe model definitions using field type and format attribute mapping."
+version: "1.0.0"
+
+input:
+  format: "KA:MO1:YAML1"
+  description: "Morphe YAML schema files"
+  suggestedStore:
+    name: "KA_MO_YAML"
+    type: "localFileSystem"
+    path: "./morphe"
+
+output:
+  format: "KA:MO1:PSQL_SEED1"
+  description: "PSQL seed data SQL files with INSERT statements"
+  suggestedStore:
+    name: "KA_MO_PSQL_SEED"
+    type: "localFileSystem"
+    path: "./seed"
+
+configSchema:
+  rowCount:
+    type: integer
+    description: "Number of seed rows to generate per model table. Defaults to 5."
+    default: 5
+  seed:
+    type: integer
+    description: "Random seed for deterministic output. Defaults to 42."
+    default: 42
+  schema:
+    type: string
+    description: "PostgreSQL schema name. Leave empty for default public schema."
+    default: ""
